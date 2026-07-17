@@ -13,12 +13,9 @@ export async function fetchProjects(): Promise<ProjectType[]> {
 }
 
 export async function fetchProjectById(id: string): Promise<ProjectType> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/projects`,
-    {
-      cache: "no-store",
-    },
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/projects/${id}`, {
+    cache: "no-store",
+  });
   if (!res.ok) {
     throw new Error(`Failed to fetch project with ID: ${id}`);
   }
