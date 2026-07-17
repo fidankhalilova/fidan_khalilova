@@ -6,7 +6,10 @@ interface BlogCardProps {
     blog: BlogTypes;
 }
 export default function BlogCard({ blog }: BlogCardProps) {
-    const sanitizedBannerSrc = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.images[0].replace(/^\//, "")}`;
+    const firstImage = blog.images[0] || "";
+    const sanitizedBannerSrc = firstImage.startsWith("/")
+      ? firstImage
+      : `/${firstImage}`;
     return (
       <Link href={`/blog/${blog._id}`}>
         <div className="p-4 border flex flex-col h-full rounded-lg shadow-sm bg-white relative ">

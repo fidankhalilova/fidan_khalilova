@@ -14,7 +14,10 @@ export default async function ProjectDetailTemplate({ params }: TemplateProps) {
   
   
   const project = await fetchProjectById(id);
-  const sanitizedSrc = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${project.image.replace(/^\//, "")}`;
+  const projectImage = project.image || "";
+  const sanitizedSrc = projectImage.startsWith("/")
+    ? projectImage
+    : `/${projectImage}`;
   
   return (
     <div className="my-30 flex flex-col gap-14 items-center justify-center min-h-screen py-2 px-4 sm:px-0">

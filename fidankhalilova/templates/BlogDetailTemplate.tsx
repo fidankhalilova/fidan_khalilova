@@ -8,7 +8,10 @@ interface TemplateProps {
 export default async function BlogDetailTemplate({ params }: TemplateProps) {
   const { id } = await params;
   const blog = await fetchBlogsById(id);
-  const sanitizedBannerSrc = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.images[0].replace(/^\//, "")}`;
+  const firstImage = blog.images[0] || "";
+  const sanitizedBannerSrc = firstImage.startsWith("/")
+    ? firstImage
+    : `/${firstImage}`;
   return (
     <div className="mt-34 mb-20 flex flex-col gap-4 sm:gap-8 items-center justify-center min-h-screen py-2 px-4 sm:px-0">
       <div className="relative h-100 w-full bg-[#AC6891] mb-5 overflow-hidden rounded-md border">

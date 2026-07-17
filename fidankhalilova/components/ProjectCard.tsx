@@ -8,7 +8,10 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const sanitizedSrc = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${project.image.replace(/^\//, "")}`;
+  const projectImage = project.image || "";
+  const sanitizedSrc = projectImage.startsWith("/")
+    ? projectImage
+    : `/${projectImage}`;
   return (
     <Link href={`/projects/${project._id}`}>
       <div className="p-4 border flex flex-col h-full rounded-lg shadow-sm bg-white relative ">
