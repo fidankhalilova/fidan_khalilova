@@ -1,4 +1,8 @@
 import HomeTemplate from "@/templates/HomeTemplate";
 export default function Home() {
-  return <HomeTemplate/>
+  return (
+    <div className="mt-20 sm:mt-0">
+      <HomeTemplate />
+    </div>
+  );
 }
